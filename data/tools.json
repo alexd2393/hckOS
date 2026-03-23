@@ -1,0 +1,131 @@
+{
+    "tools": [
+        {
+            "id": "password_cracker_basic",
+            "name": "John the Basher",
+            "type": "cracker",
+            "tier": 1,
+            "description": "Cracker de contraseñas básico. Efectivo contra sistemas débiles.",
+            "hackBonus": 2,
+            "specialAbility": "DICTIONARY_ATTACK",
+            "price": 500,
+            "unlockRequirements": []
+        },
+        {
+            "id": "password_cracker_advanced",
+            "name": "HashHunter Pro",
+            "type": "cracker",
+            "tier": 3,
+            "description": "Ataques de fuerza bruta distribuidos. Rompe encriptación militar.",
+            "hackBonus": 8,
+            "specialAbility": "RAINBOW_TABLES",
+            "price": 5000,
+            "unlockRequirements": ["password_cracker_basic", "reputation_50"]
+        },
+        {
+            "id": "packet_sniffer",
+            "name": "WireShark Noir",
+            "type": "sniffer",
+            "tier": 2,
+            "description": "Intercepta y analiza tráfico de red en tiempo real.",
+            "hackBonus": 3,
+            "specialAbility": "TRAFFIC_ANALYSIS",
+            "price": 1200,
+            "unlockRequirements": []
+        },
+        {
+            "id": "firewall_bypass",
+            "name": "Firewall Phantom",
+            "type": "bypass",
+            "tier": 2,
+            "description": "Túneles encubiertos através de sistemas de protección.",
+            "hackBonus": 5,
+            "specialAbility": "STEALTH_MODE",
+            "price": 2500,
+            "unlockRequirements": ["mission_stealth_3"]
+        },
+        {
+            "id": "decryptor",
+            "name": "CryptoBreaker",
+            "type": "decryptor",
+            "tier": 3,
+            "description": "Descifra archivos encriptados sin la clave original.",
+            "hackBonus": 6,
+            "specialAbility": "ZERO_DAY_EXPLOIT",
+            "price": 8000,
+            "unlockRequirements": ["password_cracker_advanced"]
+        },
+        {
+            "id": "proxy_chain",
+            "name": "Onion Router X",
+            "type": "anonymizer",
+            "tier": 1,
+            "description": "Enmascara tu origen a través de múltiples saltos.",
+            "hackBonus": 1,
+            "specialAbility": "TRACE_REDUCTION",
+            "price": 300,
+            "unlockRequirements": []
+        },
+        {
+            "id": "rootkit",
+            "name": "GhostRoot",
+            "type": "malware",
+            "tier": 4,
+            "description": "Acceso persistente invisible. El Santo Grial del hacking.",
+            "hackBonus": 10,
+            "specialAbility": "PERMANENT_ACCESS",
+            "price": 15000,
+            "unlockRequirements": ["reputation_100", "mission_elite_5"]
+        },
+        {
+            "id": "social_engineering_kit",
+            "name": "Human Exploit Framework",
+            "type": "social",
+            "tier": 2,
+            "description": "Plantillas de phishing y herramientas de OSINT.",
+            "hackBonus": 4,
+            "specialAbility": "PHISHING_BOOST",
+            "price": 1800,
+            "unlockRequirements": []
+        },
+        {
+            "id": "hardware_implant",
+            "name": "USB Rubber Ducky",
+            "type": "physical",
+            "tier": 3,
+            "description": "Dispositivo físico para acceso a air-gapped systems.",
+            "hackBonus": 7,
+            "specialAbility": "OFFLINE_BREACH",
+            "price": 3500,
+            "unlockRequirements": ["mission_physical_1"]
+        },
+        {
+            "id": "ai_assistant",
+            "name": "Neural Assistant v3",
+            "type": "utility",
+            "tier": 3,
+            "description": "IA que automatiza tareas y predice vulnerabilidades.",
+            "hackBonus": 5,
+            "specialAbility": "AUTO_BREACH",
+            "price": 6000,
+            "unlockRequirements": ["tier_2_tools_3"]
+        }
+    ],
+    
+    "upgrades": [
+        {
+            "id": "upgrade_ram",
+            "name": "RAM Expansion",
+            "effect": "PROCESSING_SPEED",
+            "multiplier": 1.5,
+            "price": 1000
+        },
+        {
+            "id": "upgrade_gpu",
+            "name": "GPU Cluster",
+            "effect": "CRACKING_SPEED",
+            "multiplier": 2.0,
+            "price": 3000
+        }
+    ]
+}

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AleXim OS v2.4.1</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="game-systems.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       BOOT SCREEN
+  ══════════════════════════════════════════ -->
+  <div id="boot-screen">
+    <div class="boot-wrapper">
+      <div class="boot-logo-glyph">⬡</div>
+      <div class="boot-logo-text">AleXim OS</div>
+      <div class="boot-version">v2.4.1 — Kernel 5.17.0-alex-secure</div>
+      <div class="boot-progress-track">
+        <div class="boot-progress-bar" id="boot-progress"></div>
+      </div>
+      <div class="boot-log" id="boot-log"></div>
+      <div style="margin-top:16px;font-size:10px;color:var(--text-dim);letter-spacing:2px;animation:badge-pulse 1.5s ease infinite;">
+        PRESIONÁ CUALQUIER TECLA O HACÉ CLIC PARA ENTRAR EN PANTALLA COMPLETA
+      </div>
+    </div>
+  </div>
+  <!-- FIX #7: eliminados boot-progress y boot-log duplicados (IDs dobles) -->
+
+  <!-- ══════════════════════════════════════════
+       OS DESKTOP
+  ══════════════════════════════════════════ -->
+  <div id="os-desktop" class="hidden">
+
+    <!-- Top Bar -->
+    <div id="top-bar">
+      <div class="top-left">
+        <span class="os-brand">⬡ AleXim</span>
+      </div>
+      <div class="top-center">
+        <div id="top-clock">00:00:00</div>
+      </div>
+      <div class="top-right">
+        <div class="hud-item hud-inventory" id="hud-inventory-wrap">
+          <span class="hud-label">INV</span>
+          <span class="hud-value inv-count" id="hud-inv-count">0</span>
+        </div>
+        <div class="hud-item" id="hud-money-wrap">
+          <span class="hud-label">CR</span>
+          <span class="hud-value" id="hud-money">500</span>
+        </div>
+        <div class="hud-item heat-indicator" id="hud-heat-wrap" title="Calor policial — nivel de riesgo">
+          <span class="hud-label">CALOR</span>
+          <div class="heat-track">
+            <div class="heat-fill bajo" id="hud-heat-fill"></div>
+          </div>
+          <span class="hud-value" id="hud-heat-pct" style="font-size:9px;min-width:80px;">● INACTIVO 0%</span>
+        </div>
+        <!-- v10: RAM indicator -->
+        <div class="hud-item heat-indicator" id="hud-ram-wrap" title="RAM usada por herramientas activas">
+          <span class="hud-label">RAM</span>
+          <div class="heat-track">
+            <div class="heat-fill bajo" id="hud-ram-fill" style="background:var(--cyan);width:0%"></div>
+          </div>
+          <span class="hud-value" id="hud-ram-pct" style="font-size:9px;min-width:60px;">0/4G</span>
+        </div>
+        <!-- v10: Anonymity indicator -->
+        <div class="hud-item heat-indicator" id="hud-anon-wrap" title="Nivel de anonimato — qué tan rastreable sos">
+          <span class="hud-label">ANON</span>
+          <div class="heat-track">
+            <div class="heat-fill bajo" id="hud-anon-fill" style="width:100%"></div>
+          </div>
+          <span class="hud-value" id="hud-anon-pct" style="font-size:9px;min-width:90px;color:var(--accent);">● ANON 100%</span>
+        </div>
+        <div class="hud-item net-indicator" id="hud-net">
+          <span class="net-dot"></span>
+          <span id="hud-net-label">OFFLINE</span>
+        </div>
+        <div class="hud-item hud-mute" id="btn-mute" onclick="AudioSystem.toggle(); this.classList.toggle('muted');" title="Toggle audio">
+          🔊
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop Area -->
+    <div id="desktop-area">
+
+      <!-- Desktop Icons -->
+      <div id="desktop-icons">
+        <div class="d-icon" ondblclick="AleXimOS.openApp('terminal')">
+          <div class="d-icon-gfx">⌨</div>
+          <div class="d-icon-label">Terminal</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('files')">
+          <div class="d-icon-gfx">📁</div>
+          <div class="d-icon-label">Archivos</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('messages')">
+          <div class="d-icon-gfx" style="position:relative;">
+            💬
+            <span id="messages-app-badge" class="news-badge" style="display:none;">0</span>
+          </div>
+          <div class="d-icon-label">Mensajes</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('darkmarket')">
+          <div class="d-icon-gfx">💰</div>
+          <div class="d-icon-label">DarkMarket</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('network')">
+          <div class="d-icon-gfx">🌐</div>
+          <div class="d-icon-label">Red</div>
+        </div>
+        <div class="d-icon d-icon-news" ondblclick="AleXimOS.openApp('cronica')">
+          <div class="d-icon-gfx" style="position:relative;">
+            📰
+            <span id="news-app-badge" class="news-badge" style="display:none;">0</span>
+          </div>
+          <div class="d-icon-label">CrónicaDigital</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('mp')">
+          <div class="d-icon-gfx">💳</div>
+          <div class="d-icon-label">MP</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('mipc')">
+          <div class="d-icon-gfx">🖥️</div>
+          <div class="d-icon-label">Mi PC</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('logviewer')">
+          <div class="d-icon-gfx">🗒️</div>
+          <div class="d-icon-label">Logs</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('settings')">
+          <div class="d-icon-gfx">⚙</div>
+          <div class="d-icon-label">Ajustes</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('nodosocial')">
+          <div class="d-icon-gfx">📱</div>
+          <div class="d-icon-label">NodoSocial</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('peoplesearch')">
+          <div class="d-icon-gfx">🔍</div>
+          <div class="d-icon-label">PeopleSearch</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('identityprofiler')">
+          <div class="d-icon-gfx">🪪</div>
+          <div class="d-icon-label">ID Profiler</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('darkforum')">
+          <div class="d-icon-gfx">☠</div>
+          <div class="d-icon-label">DarkForum</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('notes')">
+          <div class="d-icon-img">📝</div>
+          <div class="d-icon-label">Notas</div>
+        </div>
+        <div class="d-icon" ondblclick="AleXimOS.openApp('threatmonitor')">
+          <div class="d-icon-gfx" style="position:relative;">
+            ☣
+            <span id="threat-badge" class="news-badge" style="display:none;background:var(--danger);">!</span>
+          </div>
+          <div class="d-icon-label">Amenazas</div>
+        </div>
+      </div>
+
+      <!-- Windows Container -->
+      <div id="windows-container"></div>
+
+    </div>
+
+    <!-- Taskbar -->
+    <div id="taskbar">
+      <div id="taskbar-apps"></div>
+      <div class="taskbar-clock" id="taskbar-clock"></div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       OVERLAYS
+  ══════════════════════════════════════════ -->
+  <div id="notification-area"></div>
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+
+  <!-- ══ TRACE BAR — aparece cuando hay rastreo activo ══ -->
+  <div id="pursuit-trace-bar" class="hidden">
+    <span class="trace-label">⚡ TRACE ACTIVO — DISPOSITIVO DESCONOCIDO TE ESTÁ RASTREANDO</span>
+    <span class="trace-timer" id="trace-countdown">120s</span>
+    <button class="trace-action" onclick="NetworkSystem.disconnect(); PursuitSystem.cancelTrace('disconnect');">
+      CORTAR CONEXIÓN
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MOBILE QUICK-COMMANDS BAR
+  ══════════════════════════════════════════ -->
+  <div id="mobile-cmdbar">
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('scan')"><span class="cmd-icon">🌐</span>scan</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.prompt('connect')"><span class="cmd-icon">🔗</span>connect</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('breach')"><span class="cmd-icon">⚡</span>breach</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('ls')"><span class="cmd-icon">📁</span>ls</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.prompt('download')"><span class="cmd-icon">⬇</span>download</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('inventory')"><span class="cmd-icon">📦</span>inv</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.prompt('sell')"><span class="cmd-icon">💰</span>sell</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('offers')"><span class="cmd-icon">🤝</span>offers</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('market')"><span class="cmd-icon">📊</span>market</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('heat')"><span class="cmd-icon">🌡</span>heat</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('missions2')"><span class="cmd-icon">🎯</span>missions</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('events')"><span class="cmd-icon">🌐</span>events</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('news')"><span class="cmd-icon">📰</span>news</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('scanfrom')"><span class="cmd-icon">📡</span>scanfrom</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('disconnect')"><span class="cmd-icon">✂</span>disc</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('status')"><span class="cmd-icon">📈</span>status</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('save')"><span class="cmd-icon">💾</span>save</button>
+    <button class="mobile-cmd-btn" onclick="MobileCmds.send('help')"><span class="cmd-icon">❓</span>help</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SCRIPTS v4  (load order matters)
+  ══════════════════════════════════════════ -->
+  <!-- 1. Base del OS -->
+  <script src="js/mainMenu.js"></script>       <!-- v10.1: menú principal -->
+  <script src="js/gameState.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/terminal.js"></script>
+
+  <!-- 2. Balance config — primero para que todos lo lean -->
+  <script src="js/balanceConfig.js"></script>
+  <script src="js/ledgerSystem.js"></script>
+
+  <!-- 3. Sistemas core sin dependencias externas -->
+  <script src="js/reputationSystem.js"></script>
+  <script src="js/inventorySystem.js"></script>
+  <script src="js/localSystem.js"></script>      <!-- v10: sistema local RAM/storage/anonimato -->
+  <script src="js/darkMarketSystem.js"></script>
+
+  <!-- 4. Sistemas nuevos v4 -->
+  <script src="js/economySystem.js"></script>
+  <script src="js/pursuitSystem.js"></script>
+  <script src="js/nodeGenerator.js"></script>
+  <script src="js/eventSystem.js"></script>
+  <script src="js/missionEngine.js"></script>
+  <script src="js/saveSystem.js"></script>
+
+  <!-- v8 — Hacking Engine (antes de network.js y gameLoop.js) -->
+  <script src="js/securityLayerSystem.js"></script>
+  <script src="js/hackingEngine.js"></script>
+
+  <!-- 5. Nucleo de juego -->
+  <script src="js/network.js"></script>
+  <script src="js/gameLoop.js"></script>
+  <script src="js/localSystem_commands.js"></script> <!-- v10: comandos install/upgrade/sysinfo -->
+  <script src="js/tutorialSystem.js"></script>       <!-- v10.1: tutorial guiado -->
+  <script src="js/aleximOS.js"></script>
+
+  <!-- 6. Sistemas narrativos -->
+  <script src="js/toolsSystem.js"></script>
+  <script src="js/karmaSystem.js"></script>
+  <script src="js/missions.js"></script>
+  <script src="js/newsSystem.js"></script>
+  <script src="js/personGenerator.js"></script>
+  <script src="js/relationshipSystem.js"></script>
+  <script src="js/socialContentGenerator.js"></script>
+  <script src="js/darkForumSystem.js"></script>
+  <script src="js/worldConnector.js"></script>
+  <script src="js/worldPopulation.js"></script>
+  <script src="js/adversarialSystem.js"></script>
+  <script src="js/osintegration.js"></script>
+
+  <!-- 7. Punto de entrada -->
+  <script src="js/main.js"></script>
+
+  <!-- 8. Parche de compatibilidad (siempre al final) -->
+  <script src="js/integration-patch.js"></script>
+
+</body>
+</html>

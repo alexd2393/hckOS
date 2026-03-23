@@ -1,0 +1,55 @@
+{
+    "characters": {
+        "handler": {
+            "name": "Handler",
+            "tone": "professional",
+            "avatar": "handler.png"
+        },
+        "dealer": {
+            "name "BlackMarket Dealer",
+            "tone": "casual",
+            "avatar": "dealer.png"
+        },
+        "ai": {
+            "name": "AleXim",
+            "tone": "synthetic",
+            "avatar": "ai.png"
+        }
+    },
+    
+    "dialogues": {
+        "tutorial_start": {
+            "character": "handler",
+            "text": "Bienvenido al mercado negro. Tienes talento, pero necesitas probarlo. Hay un servidor corporativo con seguridad básica...",
+            "choices": [
+                {
+                    "text": "Acepto el trabajo",
+                    "action": "START_MISSION:tutorial_1",
+                    "karma": { "criminality": 1 }
+                },
+                {
+                    "text": "¿Qué pasa si me atrapan?",
+                    "next": "tutorial_risk"
+                }
+            ]
+        },
+        
+        "karma_reaction_criminal": {
+            "character": "handler",
+            "text": "He oído rumores sobre tus métodos... despiadados. Eso puede ser bueno o malo, dependiendo de con quién hables.",
+            "condition": { "karma": "criminality", "min": 60 }
+        },
+        
+        "karma_reaction_hero": {
+            "character": "dealer",
+            "text": "Oye, ¿eres tú el que filtró esos documentos del gobierno? Respeto, hombre. Algunos de nosotros todavía tenemos principios.",
+            "condition": { "karma": "idealism", "min": 50 }
+        },
+        
+        "trace_warning": {
+            "character": "ai",
+            "text": "ALERTA: Nivel de trazabilidad crítico. Recomiendo desconexión inmediata y cambio de identidad.",
+            "trigger": "HIGH_HEAT"
+        }
+    }
+}

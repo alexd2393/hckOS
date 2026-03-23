@@ -1,0 +1,178 @@
+[
+    {
+        "id": "tutorial_1",
+        "title": "Primeros Pasos",
+        "description": "Un contacto necesita acceso a un servidor corporativo básico. Perfecto para alguien nuevo en el juego.",
+        "client": "GhostMarket",
+        "type": "breach",
+        "difficulty": 1,
+        "reward": {
+            "money": 500,
+            "reputation": 10,
+            "tools": ["password_cracker_basic"]
+        },
+        "objectives": [
+            {
+                "id": "obj_breach",
+                "type": "breach_server",
+                "description": "Accede al servidor objetivo",
+                "target": 1
+            },
+            {
+                "id": "obj_download",
+                "type": "steal_data",
+                "description": "Descarga el archivo employee.db",
+                "target": 1,
+                "conditions": { "fileType": "db" }
+            }
+        ],
+        "karmaImpact": {
+            "criminality": 5
+        },
+        "unlocks": ["mission_2", "contact_dealer"],
+        "requires": [],
+        "hidden": false
+    },
+    {
+        "id": "mission_2",
+        "title": "Phishing Executivo",
+        "description": "Obtén credenciales de un CEO mediante ingeniería social. Requiere delicadeza.",
+        "client": "Rival Corp",
+        "type": "phishing",
+        "difficulty": 2,
+        "reward": {
+            "money": 1500,
+            "reputation": 25
+        },
+        "objectives": [
+            {
+                "id": "obj_phish",
+                "type": "phishing",
+                "description": "Compromete el email corporativo",
+                "target": 1
+            },
+            {
+                "id": "obj_extract",
+                "type": "steal_data",
+                "description": "Roba información de fusiones",
+                "target": 1
+            }
+        ],
+        "karmaImpact": {
+            "criminality": 8,
+            "humanity": -5
+        },
+        "unlocks": ["mission_3"],
+        "requires": ["tutorial_1"],
+        "hidden": false
+    },
+    {
+        "id": "mission_whistleblower",
+        "title": "La Verdad Oculta",
+        "description": "Un funcionario quiere filtrar evidencia de corrupción. Decisiones morales tendrán consecuencias.",
+        "client": "Anonymous",
+        "type": "hacktivism",
+        "difficulty": 4,
+        "reward": {
+            "money": 2000,
+            "reputation": 50
+        },
+        "objectives": [
+            {
+                "id": "obj_breach_gov",
+                "type": "breach_server",
+                "description": "Infiltra servidor gubernamental",
+                "target": 1,
+                "conditions": { "systemType": "GOVERNMENT" }
+            },
+            {
+                "id": "obj_leak",
+                "type": "steal_data",
+                "description": "Extrae y publica documentos clasificados",
+                "target": 1
+            }
+        ],
+        "karmaImpact": {
+            "criminality": 10,
+            "idealism": 15,
+            "humanity": 5
+        },
+        "unlocks": ["mission_political", "contact_journalist"],
+        "requires": ["mission_3"],
+        "hidden": false
+    },
+    {
+        "id": "mission_bank_heist",
+        "title": "El Gran Golpe",
+        "description": "Roba $50M de un banco internacional. La misión más peligrosa hasta ahora.",
+        "client": "The Syndicate",
+        "type": "theft",
+        "difficulty": 5,
+        "reward": {
+            "money": 10000,
+            "reputation": 100
+        },
+        "objectives": [
+            {
+                "id": "obj_recon",
+                "type": "breach_server",
+                "description": "Mapea la red bancaria",
+                "target": 3
+            },
+            {
+                "id": "obj_transfer",
+                "type": "steal_data",
+                "description": "Desvía fondos a cuentas seguras",
+                "target": 1
+            },
+            {
+                "id": "obj_clean",
+                "type": "delete_evidence",
+                "description": "Elimina logs de transacciones",
+                "target": 1
+            }
+        ],
+        "karmaImpact": {
+            "criminality": 25,
+            "humanity": -10
+        },
+        "unlocks": ["mission_syndicate_rank"],
+        "requires": ["mission_3", "reputation_50"],
+        "hidden": false,
+        "timeLimit": 30
+    },
+    {
+        "id": "mission_rescue",
+        "title": "Operación Extractor",
+        "description": "Un inocente será incriminado a menos que borres evidencia falsa. ¿Ayudarás?",
+        "client": "Civil Rights Group",
+        "type": "vigilante",
+        "difficulty": 3,
+        "reward": {
+            "money": 500,
+            "reputation": 30
+        },
+        "objectives": [
+            {
+                "id": "obj_find_evidence",
+                "type": "breach_server",
+                "description": "Localiza servidor de evidencia",
+                "target": 1
+            },
+            {
+                "id": "obj_delete_frame",
+                "type": "delete_evidence",
+                "description": "Elimina datos falsificados",
+                "target": 1
+            }
+        ],
+        "karmaImpact": {
+            "criminality": 3,
+            "humanity": 10,
+            "idealism": 5
+        },
+        "unlocks": ["mission_hero_path"],
+        "requires": ["mission_2"],
+        "hidden": false
+    }
+]

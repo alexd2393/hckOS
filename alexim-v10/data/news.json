@@ -1,0 +1,67 @@
+{
+    "sources": {
+        "tech": ["TechDaily", "CyberNews Network", "Digital Frontier"],
+        "crime": ["CrimeWatch", "Metro Police Report", "Anonymous Tips"],
+        "politics": ["State Media", "Independent Observer", "Leaked Reports"],
+        "financial": ["Market Watch", "Economic Times", "Crypto Insider"]
+    },
+    
+    "templates": [
+        {
+            "triggers": ["DATA_BREACH", "SUCCESSFUL_HACK"],
+            "headline": "Brecha de seguridad expone datos de {TARGET}",
+            "content": "Expertos en ciberseguridad confirman un ataque sofisticado contra {TARGET}. Se desconoce el alcance exacto del robo de información.",
+            "category": "tech",
+            "credibility": "confirmed"
+        },
+        {
+            "triggers": ["FINANCIAL_THEFT"],
+            "headline": "Robo millonario sacude al sector {SECTOR}",
+            "content": "Autoridades investigan la desaparición de {AMOUNT} en un ataque cibernético sin precedentes. Se sospecha de grupos organizados.",
+            "category": "financial",
+            "credibility": "confirmed"
+        },
+        {
+            "triggers": ["PHISHING_CAMPAIGN"],
+            "headline": "Ola de phishing afecta a miles de usuarios",
+            "content": "Una campaña de ingeniería social ha comprometido cuentas bancarias. Los expertos advierten sobre correos fraudulentos.",
+            "category": "crime",
+            "credibility": "confirmed"
+        },
+        {
+            "triggers": ["WHISTLEBLOW"],
+            "headline": "Filtración expone corrupción en altos niveles",
+            "content": "Documentos clasificados revelan actividades ilícitas de funcionarios gubernamentales. El gobierno niega las acusaciones.",
+            "category": "politics",
+            "credibility": "unconfirmed"
+        },
+        {
+            "triggers": ["MALWARE_OUTBREAK"],
+            "headline": "Nuevo ransomware 'AleXim' aterroriza infraestructura crítica",
+            "content": "Un sofisticado malware ha paralizado hospitales y servicios públicos. Se exige rescate en criptomonedas.",
+            "category": "tech",
+            "credibility": "confirmed"
+        }
+    ],
+    
+    "background": [
+        {
+            "headline": "Crece el fraude digital en la región",
+            "content": "Estadísticas muestran un aumento del 40% en delitos cibernéticos este trimestre.",
+            "category": "crime",
+            "credibility": "confirmed"
+        },
+        {
+            "headline": "Nueva regulación de ciberseguridad entra en vigor",
+            "content": "El gobierno promete recursos adicionales para combatir el crimen digital.",
+            "category": "politics",
+            "credibility": "confirmed"
+        },
+        {
+            "headline": "Mercado negro de datos en auge",
+            "content": "Informes sugieren que la venta de información personal nunca ha sido tan lucrativa.",
+            "category": "financial",
+            "credibility": "rumor"
+        }
+    ]
+}
